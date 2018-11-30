@@ -6,11 +6,13 @@
 # Note that the updated Site value can take a minute or two before it updates in the JSS.
 
 computerSite=`/usr/bin/osascript << EOT
-tell application "System Events"
-   activate
-   set sites to {"Location01", "Location02", "Location03"}
-   set computerSite to choose from list sites with prompt "Select this system's location:"
-end tell
+with timeout of 28800 seconds
+   tell application "System Events"
+      activate
+      set sites to {"Location01", "Location02", "Location03"}
+      set computerSite to choose from list sites with prompt "Select this system's location:"
+   end tell
+end timeout
 EOT`
 
 # Find your site names and IDs by visiting https://<jamfURL>/api/#!/sites/findSites_get
